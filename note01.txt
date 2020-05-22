@@ -1,0 +1,30 @@
+0. 看起來不錯的教學
+https://www.coderbridge.com/@gitmaruneko
+https://www.coderbridge.com/@gitmaruneko/8651d8458b6f4f538fbeb2cb330a933a (初始安裝)
+https://www.cnblogs.com/lsdb/p/10861344.html 
+
+1. pipenv 安裝robot framework:
+pipenv install robotframework
+(pipenv shell切換到pipenv環境)
+確認是否安裝完成: python -m robot --version
+
+2. 安裝wxpython  (似乎不用?  因為我看安裝RIDE時會移除此版並重裝)
+pipenv install wxPython
+確認安裝成功: python -c "import wx;print(wx.__version__)"
+
+3. 安裝RIDE
+pipenv install robotframework-ride
+(但如何啟動呢???
+目前使用pipenv shell中執行python ride.py失敗
+>>  改成直接到C:\Users\1700485\.virtualenvs\robotframework-learn-X6lOIfbD\Scripts 虛擬環境目錄中的Script目錄中
+直接執行python ride.py
+這樣有成功啟動RIDE IDE~
+)
+
+4 安裝robotframework-selenium2library
+pip install robotframework-selenium2library
+
+5. 下載chromeDriver
+(https://chromedriver.chromium.org/downloads)
+目前我先載83 (因chrome為 83版)
+我複製到該虛擬環境中
