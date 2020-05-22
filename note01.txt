@@ -2,6 +2,9 @@
 https://www.coderbridge.com/@gitmaruneko
 https://www.coderbridge.com/@gitmaruneko/8651d8458b6f4f538fbeb2cb330a933a (初始安裝)
 https://www.cnblogs.com/lsdb/p/10861344.html 
+http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
+(部分測試採用自行撰寫之範例)
+
 
 1. pipenv 安裝robot framework:
 pipenv install robotframework
@@ -18,6 +21,8 @@ pipenv install robotframework-ride
 目前使用pipenv shell中執行python ride.py失敗
 >>  改成直接到C:\Users\1700485\.virtualenvs\robotframework-learn-X6lOIfbD\Scripts 虛擬環境目錄中的Script目錄中
 直接執行python ride.py
+
+或是將ride.py移到專案目錄再執行也是可以的唷~
 這樣有成功啟動RIDE IDE~
 )
 
@@ -28,3 +33,10 @@ pip install robotframework-selenium2library
 (https://chromedriver.chromium.org/downloads)
 目前我先載83 (因chrome為 83版)
 我複製到該虛擬環境中
+
+6. 可以開始測試囉!!
+(selenium2library 關鍵字可參考: https://robotframework.org/Selenium2Library/Selenium2Library.html#Set%20Screenshot%20Directory)
+
+******************************
+7. 若需要自行新增python lib
+http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
