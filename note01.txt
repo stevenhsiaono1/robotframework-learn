@@ -36,7 +36,34 @@ pip install robotframework-selenium2library
 
 6. 可以開始測試囉!!
 (selenium2library 關鍵字可參考: https://robotframework.org/Selenium2Library/Selenium2Library.html#Set%20Screenshot%20Directory)
+啟動可以用IDE
+也可以 robot XXXX.robot
 
 ******************************
 7. 若需要自行新增python lib
 http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
+
+******************************
+8. 若須要remote Electron APP,  一開始發現有問題無法啟動app
+後來Sunny提供3種方法: (都測過可以用!!!!)
+(1).
+vars.py:
+binary_location = {"goog:chromeOptions": {'binary': 'C:/Users/user/Desktop/imooc_learn/electron-simple-player/build/win-unpacked/electron-simple-player.exe'}}
+XXX.robot:
+*** Settings ***
+Library    Selenium2Library    run_on_failure=Log Source
+Variables    ./vars.py
+Test Setup    Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=http://127.0.0.1:9515
+
+(2). 
+*** Settings ***
+Library    Selenium2Library    run_on_failure=Log Source
+Test Setup      Open Browser    None    Chrome    options=binary_location=r"C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe"
+
+(3).
+test case:
+*** Test Cases ***
+Foo
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
+    ${options.binary_location} =    set variable    C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe
+    Create Webdriver    Chrome    options=${options}

@@ -1,33 +1,25 @@
 
 *** Settings ***
 Library    Selenium2Library    run_on_failure=Log Source
-Variables    vars.py
+Variables    ./vars.py
+# Test Setup      Open Browser    None    Chrome    options=binary_location=r"C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe"
+Test Setup    Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=http://127.0.0.1:9515
+
+
+
+
 
 *** Test Cases ***
 Foo
-    Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=http://localhost:9515
-    # Wait Until Page Contains Element    css=.workspace
+    # ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
+    # ${options.binary_location} =    set variable    C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe
+    # Create Webdriver    Chrome    options=${options}
+    Wait Until Page Contains Element    //*[@id="nzxt-page"]/img    20
+    # Get Text    add-music-btn
+    
+    # Wait Until Page Contains Element    //*[@id="nzxt-page"]/img    20
+    
+    
     # [Teardown]    Close All Browsers
 
 
-
-# *** Settings ***
-# Library           Selenium2Library
-# Library           OperatingSystem
-# Variables         vars.py
-
-# *** Variables ***
-# # ${Delay}          1s
-# ${executor}       http://localhost:9515
-
-# *** Test Cases ***
-# Foo
-#     # Set Selenium Speed    ${Delay}
-#     Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=${executor}
-#     # Wait Until Page Contains Element    css=.workspace
-#     # [Teardown]    Close All Browsers
-
-# *** Keywords ***
-
-# Set Environment Variable
-#     webdriver.chrome.driver    ./chromedriver.exe
