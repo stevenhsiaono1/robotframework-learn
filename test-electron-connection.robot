@@ -5,10 +5,6 @@ Variables    ./vars.py
 # Test Setup      Open Browser    None    Chrome    options=binary_location=r"C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe"
 Test Setup    Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=http://127.0.0.1:9515
 
-
-
-
-
 *** Test Cases ***
 Foo
     # ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
@@ -17,9 +13,5 @@ Foo
     Wait Until Page Contains Element    //*[@id="nzxt-page"]/img    20
     # Get Text    add-music-btn
     
-    # Wait Until Page Contains Element    //*[@id="nzxt-page"]/img    20
-    
-    
-    # [Teardown]    Close All Browsers
 
 
