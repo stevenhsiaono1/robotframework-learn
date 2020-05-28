@@ -39,12 +39,13 @@ pip install robotframework-selenium2library
 啟動可以用IDE
 也可以 robot XXXX.robot
 
-******************************
 7. 若需要自行新增python lib
 http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
 
+
 ******************************
-8. 若須要remote Electron APP,  一開始發現有問題無法啟動app
+遇到問題:
+1. 若須要remote Electron APP,  一開始發現有問題無法啟動app
 後來Sunny提供3種方法: (都測過可以用!!!!)
 (1).
 vars.py:
@@ -67,3 +68,17 @@ Foo
     ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
     ${options.binary_location} =    set variable    C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe
     Create Webdriver    Chrome    options=${options}
+
+
+2. 需要到windows視窗選檔>>  預期使用python autoit lib>pip install PyAutoit
+https://www.itdaan.com/tw/dc84521aaf52ce069606c08852a32425  (測試中)
+再用robot framework呼叫此lib
+***************************************************
+筆記:
+1. HowToWriteGoodTestCases
+https://github.com/robotframework/HowToWriteGoodTestCases/blob/master/HowToWriteGoodTestCases.rst
+2. 再探 Robot Framework 與 Test Case 撰寫的 Best Practice
+http://blog.castman.net/programming/2016/07/28/robotframework.html
+3. Robot Framework 快速入門
+http://carl.logdown.com/posts/2014/03/07/robotframework-gettingstarted
+
