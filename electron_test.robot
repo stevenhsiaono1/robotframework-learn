@@ -1,6 +1,7 @@
 *** Settings ***
 Test Setup        Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=http://127.0.0.1:9515    # Test Setup    Open Browser    None    Chrome    options=binary_location=r"C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe"
 Test Teardown     Close Browser
+
 Library           Selenium2Library    run_on_failure=Log Source
 Variables         ./vars.py
 Library           FileControl.py
@@ -36,11 +37,12 @@ ${AUDIO_PATH}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-playe
 #     Sleep  10s
 
 
-# Check No Media Then Add Image
-#     Clear Then Add Media    ${AUDIO_PATH}
-#     Select Window    MAIN
-#     Wait And Click    class:fa-play
-#     Sleep  10s
+Check No Media Then Add Image
+    Clear Then Add Media    ${AUDIO_PATH}
+    Select Window    MAIN
+    Wait And Click    class:fa-play
+    Sleep  10s
+    Delete All Cookies
 
 
 *** Keywords ***
@@ -57,7 +59,7 @@ Clear Then Add Media
     Wait Until Page Contains    No Media on List!    10
     Wait And Click    id:add-music-btn
     Select Window    NEW
-    Wait And Click    id:select-music
+    Wait And Click    id:select-media
     Sleep  5s
     # call customized lib of autoit
     ${result}    set_file    ${FILE_PATH}

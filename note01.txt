@@ -1,3 +1,10 @@
+啟動:
+clone後
+pipenv shell (若出錯失敗先用新資料夾建環境)
+再將clone的資料取代近來，原因還再確認
+然後就可以python ride.py開IDE或是 robot XXX.robot
+
+***************************
 0. 看起來不錯的教學
 https://www.coderbridge.com/@gitmaruneko
 https://www.coderbridge.com/@gitmaruneko/8651d8458b6f4f538fbeb2cb330a933a (初始安裝)
