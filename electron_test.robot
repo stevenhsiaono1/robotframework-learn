@@ -7,6 +7,7 @@ Library           FileControl.py
 
 *** Variables ***
 ${IMAGE_PATH}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\images\\平視馬特洪峰，是我一直以來的願望.jpg
+${AUDIO_PATH}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\audio\\Wincent Weiss - Kein Lied (Live in der Barclaycard Arena, Hamburg, 2019).mp3
 
 *** Test Cases ***
 # Main Page
@@ -28,12 +29,18 @@ ${IMAGE_PATH}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-playe
 #    Select Window    MAIN
 #    Wait Until Element Is Visible    id:nzxt-page    10
     
+# Check No Media Then Add Image
+#     Clear Then Add Media    ${IMAGE_PATH}
+#     Select Window    MAIN
+#     Wait And Click    class:fa-play
+#     Sleep  10s
 
-Check No Media Then Add Media
-    Clear Then Add Media    ${IMAGE_PATH}
-    Select Window    MAIN
-    Wait And Click    class:fa-play
-    Sleep  5s
+
+# Check No Media Then Add Image
+#     Clear Then Add Media    ${AUDIO_PATH}
+#     Select Window    MAIN
+#     Wait And Click    class:fa-play
+#     Sleep  10s
 
 
 *** Keywords ***
