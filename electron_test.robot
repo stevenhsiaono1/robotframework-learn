@@ -30,18 +30,23 @@ ${AUDIO_PATH}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-playe
 #    Select Window    MAIN
 #    Wait Until Element Is Visible    id:nzxt-page    10
     
-# Check No Media Then Add Image
+# Check No Media Then Add Image To Play
 #     Clear Then Add Media    ${IMAGE_PATH}
 #     Select Window    MAIN
 #     Wait And Click    class:fa-play
-#     Sleep  10s
+#     Sleep  5s
+#     Wait Until Element Is Visible    id:play-images    5s
+#     Wait And Click    class:fa-pause
+#     Wait Until Element Is Not Visible    id:play-images    5s
+#     Sleep  5s
 
-
-Check No Media Then Add Image
+Check No Media Then Add Audio To Play
     Clear Then Add Media    ${AUDIO_PATH}
     Select Window    MAIN
     Wait And Click    class:fa-play
     Sleep  10s
+    Wait And Click    class:fa-pause
+    Sleep  5s
     Delete All Cookies
 
 
