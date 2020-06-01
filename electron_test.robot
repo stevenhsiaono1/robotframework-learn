@@ -32,32 +32,13 @@ Show Add Media Window
    Wait Until Element Is Visible    id:nzxt-page    10
     
 Check No Media Then Add Image To Play
-    Clear Then Add Media    ${IMAGE_PATH}
-    Select Window    MAIN
-    Wait And Click    class:fa-play
-    Sleep  5s
-    Wait Until Element Is Visible    id:play-images    5s
-    Wait And Click    class:fa-pause
-    Wait Until Element Is Not Visible    id:play-images    5s
-    Sleep  5s
+    Check No Media Then Add Media To Play    ${IMAGE_PATH}    id:play-images
 
 Check No Media Then Add Audio To Play
-    Clear Then Add Media    ${AUDIO_PATH}
-    Select Window    MAIN
-    Wait And Click    class:fa-play
-    Sleep  10s
-    Wait And Click    class:fa-pause
-    Sleep  5s
-    Delete All Cookies
+    Check No Media Then Add Media To Play    ${AUDIO_PATH}    id:current-seeker
 
 Check No Media Then Add Video To Play
-    Clear Then Add Media    ${VIDEO_PATH}
-    Select Window    MAIN
-    Wait And Click    class:fa-play
-    Sleep  10s
-    Wait And Click    class:fa-pause
-    Sleep  5s
-    Delete All Cookies
+    Check No Media Then Add Media To Play    ${VIDEO_PATH}    id:play-video
 
 
 *** Keywords ***
@@ -81,3 +62,16 @@ Clear Then Add Media
     Sleep  5s
     Wait And Click    id:add-music
     Sleep  5s
+
+
+Check No Media Then Add Media To Play
+    [Arguments]    ${FILE_PATH}    ${locator}
+    Clear Then Add Media    ${FILE_PATH}
+    Select Window    MAIN
+    Wait And Click    class:fa-play
+    Sleep  10s
+    Wait Until Element Is Visible    ${locator}    5s
+    Wait And Click    class:fa-pause
+    Wait Until Element Is Not Visible    ${locator}    5s
+    Sleep  3s
+    Delete All Cookies
