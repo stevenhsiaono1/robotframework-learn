@@ -9,39 +9,49 @@ Library           FileControl.py
 *** Variables ***
 ${IMAGE_PATH}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\images\\平視馬特洪峰，是我一直以來的願望.jpg
 ${AUDIO_PATH}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\audio\\Wincent Weiss - Kein Lied (Live in der Barclaycard Arena, Hamburg, 2019).mp3
+${VIDEO_PATH}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\video\\孫盛希 Shi Shi【Someday or One Day】電視劇「想見你」片頭曲 Official Music Video.mp4
 
 *** Test Cases ***
-# Main Page
-#    # ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
-#    # ${options.binary_location} =    set variable    C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe
-#    # Create Webdriver    Chrome    options=${options}
-#    Wait Until Page Contains Element    //*[@id="nzxt-page"]/img    20
+Main Page
+   # ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
+   # ${options.binary_location} =    set variable    C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe
+   # Create Webdriver    Chrome    options=${options}
+   Wait Until Page Contains Element    //*[@id="nzxt-page"]/img    20
 
-# Logo Redirection
-#    # Use Keywords
-#    Wait And Click    //*[@id="nzxt-page"]/img
-#    Wait Until Page Contains    為電腦玩家與組裝者打造的機殼、散熱器材與配件。    20
+Logo Redirection
+   # Use Keywords
+   Wait And Click    //*[@id="nzxt-page"]/img
+   Wait Until Page Contains    為電腦玩家與組裝者打造的機殼、散熱器材與配件。    20
 
-# Show Add Media Window
-#    Wait And Click    id:add-music-btn
-#    Select Window    NEW
-#    Wait Until Page Contains    Select Media to List    10
-#    Wait And Click    id:add-music
-#    Select Window    MAIN
-#    Wait Until Element Is Visible    id:nzxt-page    10
+Show Add Media Window
+   Wait And Click    id:add-music-btn
+   Select Window    NEW
+   Wait Until Page Contains    Select Media to List    10
+   Wait And Click    id:add-music
+   Select Window    MAIN
+   Wait Until Element Is Visible    id:nzxt-page    10
     
-# Check No Media Then Add Image To Play
-#     Clear Then Add Media    ${IMAGE_PATH}
-#     Select Window    MAIN
-#     Wait And Click    class:fa-play
-#     Sleep  5s
-#     Wait Until Element Is Visible    id:play-images    5s
-#     Wait And Click    class:fa-pause
-#     Wait Until Element Is Not Visible    id:play-images    5s
-#     Sleep  5s
+Check No Media Then Add Image To Play
+    Clear Then Add Media    ${IMAGE_PATH}
+    Select Window    MAIN
+    Wait And Click    class:fa-play
+    Sleep  5s
+    Wait Until Element Is Visible    id:play-images    5s
+    Wait And Click    class:fa-pause
+    Wait Until Element Is Not Visible    id:play-images    5s
+    Sleep  5s
 
 Check No Media Then Add Audio To Play
     Clear Then Add Media    ${AUDIO_PATH}
+    Select Window    MAIN
+    Wait And Click    class:fa-play
+    Sleep  10s
+    Wait And Click    class:fa-pause
+    Sleep  5s
+    Delete All Cookies
+
+Check No Media Then Add Video To Play
+    Clear Then Add Media    ${VIDEO_PATH}
     Select Window    MAIN
     Wait And Click    class:fa-play
     Sleep  10s

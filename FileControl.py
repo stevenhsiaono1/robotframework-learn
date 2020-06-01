@@ -1,5 +1,5 @@
 import autoit
-from vars import image_path, audio_path
+# from vars import image_path, audio_path
 
 class FileControl:
     def set_file(self, file_path):
