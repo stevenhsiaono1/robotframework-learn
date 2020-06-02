@@ -81,7 +81,9 @@ Foo
 https://www.itdaan.com/tw/dc84521aaf52ce069606c08852a32425  (測試中)
 再用robot framework呼叫此lib
 
-3. Robot Framework的存檔在哪裡??
+3. Robot Framework的存檔在哪裡:
+C:\Users\1700485\AppData\Local\Temp
+會是temp file
 ***************************************************
 筆記:
 1. HowToWriteGoodTestCases
