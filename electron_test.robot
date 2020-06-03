@@ -39,17 +39,37 @@ Check No Media Then Add Audio To Play
 Check No Media Then Add Video To Play
     Check No Media Then Add Media To Play    ${VIDEO_PATH}    id:play-video
 
+Check No Media Then Add Multiple Media to Play
+    Clear Media
+    Add Media    ${IMAGE_PATH}
+    Add Media    ${AUDIO_PATH}
+    Add Media    ${VIDEO_PATH}
+    Wait And Click    //*[@id="tracksList"]/ul/li[1]/div/i[1]
+    Sleep  5s
+    ${count} =    Get Element Count    class:fa-pause
+    Should Be True    ${count} == 1
+    Wait And Click    //*[@id="tracksList"]/ul/li[2]/div/i[1]
+    Sleep  5s
+    ${count} =    Get Element Count    class:fa-pause
+    Should Be True    ${count} == 1
+    Wait And Click    //*[@id="tracksList"]/ul/li[3]/div/i[1]
+    Sleep  5s
+    ${count} =    Get Element Count    class:fa-pause
+    Should Be True    ${count} == 1
+
 *** Keywords ***
 Wait And Click
     [Arguments]    ${locator}
     Wait Until Element Is Visible    ${locator}    20
     Click Element    ${locator}
 
-Clear Then Add Media
-    [Arguments]    ${FILE_PATH}
+Clear Media
     Sleep  3s
     Wait And Click    id:delete-all-btn
     Wait Until Page Contains    No Media on List!    10
+
+Add Media
+    [Arguments]    ${FILE_PATH}
     Wait And Click    id:add-media-btn
     Select Window    NEW
     Wait And Click    id:select-media
@@ -59,10 +79,12 @@ Clear Then Add Media
     Sleep  5s
     Wait And Click    id:add-media
     Sleep  5s
+    Select Window    MAIN
 
 Check No Media Then Add Media To Play
     [Arguments]    ${FILE_PATH}    ${locator}
-    Clear Then Add Media    ${FILE_PATH}
+    Clear Media
+    Add Media    ${FILE_PATH}
     Select Window    MAIN
     Wait And Click    class:fa-play
     Sleep  10s
