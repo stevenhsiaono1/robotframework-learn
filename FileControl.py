@@ -1,5 +1,4 @@
 import autoit
-# from vars import image_path, audio_path
 
 class FileControl:
     def set_file(self, file_path):
@@ -10,3 +9,10 @@ class FileControl:
         # 單擊按鈕
         autoit.control_click("開啟","[Class:Button; instance:1]")
         return
+
+
+# TO: 切換語言不過
+
+# Return Value
+# Success:	1.
+# Failure:	0.
