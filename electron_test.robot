@@ -13,81 +13,86 @@ ${VIDEO}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\re
 ${DELAY}    10
 ${RETRY_CNT}    20 sec
 ${RETRY_INTERVAL}    5 sec
+${PLAY_SEC}    10
+${PAUSE_SEC}    3
 
 *** Test Cases ***
-# Show Main Page
-#     Check Logo Shows
+Show Main Page
+    Check Logo Shows
 
-# Check Logo Redirection
-#     Check Logo Shows
-#     Click Logo Shoud Direct To Official Website
+Check Logo Redirection
+    Check Logo Shows
+    Click Logo Shoud Direct To Official Website
    
-# Show Add Media Window
-#     Click Add Media Btn
-#     Default Add Window Should Contain "Select Media to List"
-#     Click Confirm And Add Btn
-#     Check Logo Shows
+Show Add Media Window
+    Click Add Media Btn
+    Default Add Window Should Contain "Select Media to List"
+    Click Confirm And Add Btn
+    Check Logo Shows
     
 Clear And Add Image To Play
-    Check No Media On List
+    Clear All Media
     Click Add Media Btn
+    Check Add List Empty
     Select ${IMAGE} To Add List
-    sleep    3
+    Check Add List Not Empty
     Click Confirm And Add Btn
-    sleep   3
+    Check Main List Not Empty
+    Check Media Shows With id:play-images
+    
+Clear And Add Audio To Play
+    Clear All Media
+    Click Add Media Btn
+    Check Add List Empty
+    Select ${AUDIO} To Add List
+    Check Add List Not Empty
+    Click Confirm And Add Btn
+    Check Main List Not Empty
+    Check Media Shows With id:current-seeker
 
-# Clear And Add Audio To Play
-#     Check No Media On List
-#     Click Add Media Btn
-#     Select ${IMAGE} To Add List
-#     sleep    3
-#     Click Confirm And Add Btn
-#     sleep   3
+Clear And Add Video To Play
+    Clear All Media
+    Click Add Media Btn
+    Check Add List Empty
+    Select ${VIDEO} To Add List
+    Check Add List Not Empty
+    Click Confirm And Add Btn
+    Check Main List Not Empty
+    Check Media Shows With id:play-video
 
-# Clear And Add Video To Play
-#     Check No Media On List
-#     Click Add Media Btn
-#     Select ${IMAGE} To Add List
-#     sleep    3
-#     Click Confirm And Add Btn
-#     sleep   3
-
-# 以上為新版OK
-
-# Check No Media Then Add Image To Play
-#     Check No Media Then Add Media To Play    ${IMAGE}    id:play-images
-#     # 拆細
-
-# # 用embedded
-# # Check ${IMAGE} shows with id:play-images
-# # *** Keywords ***
-# # Check ${img} shows with ${id}
-# #     sifaaf
-
-# Check No Media Then Add Audio To Play
-#     Check No Media Then Add Media To Play    ${AUDIO}    id:current-seeker
-
-# Check No Media Then Add Video To Play
-#     Check No Media Then Add Media To Play    ${VIDEO}    id:play-video
-
-# Check No Media Then Add Multiple Media to Play
-#     Clear Media
-#     Add Media    ${IMAGE}
-#     Add Media    ${AUDIO}
-#     Add Media    ${VIDEO}
-#     Wait And Click    //*[@id="tracksList"]/ul/li[1]/div/i[1]
-#     Sleep  5s
-#     # 抽出去
-#     ${count} =    Get Element Count    class:fa-pause
-#     Should Be True    ${count} == 1
-#     Wait And Click    //*[@id="tracksList"]/ul/li[2]/div/i[1]
-#     Sleep  5s
-#     ${count} =    Get Element Count    class:fa-pause
-#     Should Be True    ${count} == 1
-#     Wait And Click    //*[@id="tracksList"]/ul/li[3]/div/i[1]
-#     Sleep  5s
-#     ${count} =    Get Element Count    class:fa-pause
-#     Should Be True    ${count} == 1
+# BAD Sample
+Check No Media Then Add Multiple Media to Play
+    Clear All Media
+    Click Add Media Btn
+    Check Add List Empty
+    Select ${IMAGE} To Add List
+    Check Add List Not Empty
+    Click Confirm And Add Btn
+    Check Main List Not Empty
+    Click Add Media Btn
+    Check Add List Empty
+    Select ${AUDIO} To Add List
+    Check Add List Not Empty
+    Click Confirm And Add Btn
+    Check Main List Not Empty
+    Click Add Media Btn
+    Check Add List Empty
+    Select ${VIDEO} To Add List
+    Check Add List Not Empty
+    Click Confirm And Add Btn
+    Check Main List Not Empty
+    Wait And Click    //*[@id="tracksList"]/ul/li[1]/div/i[1]
+    Sleep  5s
+    ${count} =    Get Element Count    class:fa-pause
+    Should Be True    ${count} == 1
+    Wait And Click    //*[@id="tracksList"]/ul/li[2]/div/i[1]
+    Sleep  10s
+    ${count} =    Get Element Count    class:fa-pause
+    Should Be True    ${count} == 1
+    Wait And Click    //*[@id="tracksList"]/ul/li[3]/div/i[1]
+    Sleep  10s
+    ${count} =    Get Element Count    class:fa-pause
+    Should Be True    ${count} == 1
 
 *** Keywords ***
 Wait And Click
@@ -113,63 +118,33 @@ Click Confirm And Add Btn
     Wait And Click    id:add-media
     Select Window    MAIN
 
-Check No Media On List
+Clear All Media
     Wait And Click    id:delete-all-btn
     Wait Until Page Contains    No Media on List!    ${DELAY}
 
-Select ${IMAGE} To Add List
+Check Add List Empty
+    Wait Until Element Is Not Visible    //*[@id="musicList"]/ul/li    ${DELAY}
+
+Check Add List Not Empty
+    Wait Until Element Is Visible    //*[@id="musicList"]/ul/li    ${DELAY}
+
+Select ${MEDIA} To Add List
     Wait And Click    id:select-media
-    Wait Until Keyword Succeeds    ${RETRY_CNT}    ${RETRY_INTERVAL}    Set File Path    ${IMAGE}
+    Wait Until Keyword Succeeds    ${RETRY_CNT}    ${RETRY_INTERVAL}    Set File Path    ${MEDIA}
 
 Set File Path
-    [Arguments]    ${FILE_PATH}
-    ${result}    set_file    ${FILE_PATH}
-    Should Be True    ${result} == 0
+    [Arguments]    ${MEDIA}
+    ${result}    set_file    ${MEDIA}
+    Should Be True    ${result} == True
 
+Check Main List Not Empty
+    Wait Until Page Does Not Contain    No Media on List!    ${DELAY}
 
-
-# Select Media To Add List With ${FILE_PATH}
-#     Wait And Click    id:select-media
-#     Wait Until Keyword Succeeds    2 min    5 sec    Set File With ${FILE_PATH}
-
-# Set File With ${PATH}
-#     ${result}    set_file    ${PATH}
-
-# 上面是改寫
-# ******************************************************************
-
-
-# Wait And Click
-#     [Arguments]    ${locator}
-#     Wait Until Element Is Visible    ${locator}    20
-#     Click Element    ${locator}
-
-# Clear Media
-#     Sleep  3s
-#     Wait And Click    id:delete-all-btn
-#     Wait Until Page Contains    No Media on List!    10
-
-# Add Media
-#     [Arguments]    ${FILE_PATH}
-#     Wait And Click    id:add-media-btn
-#     Select Window    NEW
-#     Wait And Click    id:select-media
-#     Sleep  5s    # 此用try / until keywords success,  不用sleep
-#     # call customized lib of autoit
-#     ${result}    set_file    ${FILE_PATH}    
-#     Sleep  5s
-#     Wait And Click    id:add-media
-#     Sleep  5s
-#     Select Window    MAIN   # TODO:補comment 目的
-
-# Check No Media Then Add Media To Play
-#     [Arguments]    ${FILE_PATH}    ${locator}
-#     Clear Media
-#     Add Media    ${FILE_PATH}
-#     # Select Window    MAIN
-#     Wait And Click    class:fa-play
-#     Sleep  10s   
-#     Wait Until Element Is Visible    ${locator}    5s
-#     Wait And Click    class:fa-pause
-#     Wait Until Element Is Not Visible    ${locator}    5s
-#     Sleep  3s
+Check Media Shows With ${locator}
+    sleep    ${PAUSE_SEC}
+    Wait And Click    class:fa-play
+    Wait Until Element Is Visible    ${locator}    ${DELAY}
+    sleep    ${PLAY_SEC}
+    Wait And Click    class:fa-pause
+    Wait Until Element Is Not Visible    ${locator}    ${DELAY}
+    sleep    ${PAUSE_SEC}
