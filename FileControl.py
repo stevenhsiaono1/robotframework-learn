@@ -7,9 +7,9 @@ class FileControl:
         #輸入text        
         autoit.control_set_text("開啟","[Class:Edit; instance:1]", file_path)
         # 單擊按鈕
-        autoit.control_click("開啟","[Class:Button; instance:1]")
-        return
-
+        ret = autoit.control_click("開啟","[Class:Button; instance:1]")
+        # return autoit.control_click("開啟","[Class:Button; instance:1]")
+        return ret
 
 # TO: 切換語言不過
 
