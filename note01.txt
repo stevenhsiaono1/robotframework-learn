@@ -12,7 +12,6 @@ https://www.cnblogs.com/lsdb/p/10861344.html
 http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
 (部分測試採用自行撰寫之範例)
 
-
 1. pipenv 安裝robot framework:
 pipenv install robotframework
 (pipenv shell切換到pipenv環境)
@@ -48,7 +47,6 @@ pip install robotframework-selenium2library
 
 7. 若需要自行新增python lib
 http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-test-libraries
-
 
 ******************************
 遇到問題:

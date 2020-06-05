@@ -6,7 +6,7 @@ Library           FileControl.py
 Variables         ./vars.py
 
 *** Variables ***
-${IMAGE}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\images\\平視馬特洪峰，是我一直以來的願望.jpg
+${IMAGE}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\images\\Königssee準備搭船遊國王胡，美的不可思議.jpg
 ${AUDIO}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\audio\\DIMMU BORGIR - Interdimensional Summit (OFFICIAL MUSIC VIDEO).mp3
 ${VIDEO}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\video\\孫盛希 Shi Shi【Someday or One Day】電視劇「想見你」片頭曲 Official Music Video.mp4
 ${DELAY}    10
@@ -33,7 +33,7 @@ Show Add Media Window
     Check Logo Shows
     Sleep    ${DEMO_PURPOSE_SEC}
 
-# Test case name obey the priciple, but easy to demo
+# Test case name obey the principle, but it's easy to demo
 Add Image To Play And Pause
     Click Add Media Btn
     Check Add List Empty
@@ -98,8 +98,6 @@ Add Multiple Media to Play And Pause
 *** Keywords ***
 Open Browser
     Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=http://127.0.0.1:9515
-
-
 
 Wait And Click
     [Arguments]    ${locator}
