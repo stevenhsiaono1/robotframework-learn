@@ -1,37 +1,40 @@
 *** Settings ***
-Test Setup        Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=http://127.0.0.1:9515    # Test Setup    Open Browser    None    Chrome    options=binary_location=r"C:\\Users\\user\\Desktop\\imooc_learn\\electron-simple-player\\build\\win-unpacked\\electron-simple-player.exe"
+Test Setup        Run Keywords    Open Browser    AND    Clear All Media
 Test Teardown     Close Browser
 Library           Selenium2Library    run_on_failure=Log Source
 Library           FileControl.py
-# Library           FileControl.FileControl
 Variables         ./vars.py
 
 *** Variables ***
 ${IMAGE}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\images\\平視馬特洪峰，是我一直以來的願望.jpg
-${AUDIO}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\audio\\Wincent Weiss - Kein Lied (Live in der Barclaycard Arena, Hamburg, 2019).mp3
+${AUDIO}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\audio\\DIMMU BORGIR - Interdimensional Summit (OFFICIAL MUSIC VIDEO).mp3
 ${VIDEO}    C:\\Users\\1700485\\Desktop\\git_project\\electron-simple-player\\resources\\video\\孫盛希 Shi Shi【Someday or One Day】電視劇「想見你」片頭曲 Official Music Video.mp4
 ${DELAY}    10
 ${RETRY_CNT}    20 sec
 ${RETRY_INTERVAL}    5 sec
-${PLAY_SEC}    10
-${PAUSE_SEC}    3
+${DEMO_PLAY_SEC}    10
+${DEMO_PAUSE_SEC}    3
+${DEMO_PURPOSE_SEC}    5
 
 *** Test Cases ***
 Show Main Page
     Check Logo Shows
+    Sleep    ${DEMO_PURPOSE_SEC}
 
 Check Logo Redirection
     Check Logo Shows
     Click Logo Shoud Direct To Official Website
+    Sleep    ${DEMO_PURPOSE_SEC}
    
 Show Add Media Window
     Click Add Media Btn
     Default Add Window Should Contain "Select Media to List"
     Click Confirm And Add Btn
     Check Logo Shows
-    
-Clear And Add Image To Play
-    Clear All Media
+    Sleep    ${DEMO_PURPOSE_SEC}
+
+# Test case name obey the priciple, but easy to demo
+Add Image To Play And Pause
     Click Add Media Btn
     Check Add List Empty
     Select ${IMAGE} To Add List
@@ -39,9 +42,9 @@ Clear And Add Image To Play
     Click Confirm And Add Btn
     Check Main List Not Empty
     Check Media Shows With id:play-images
+    Check Media Disappear With id:play-images
     
-Clear And Add Audio To Play
-    Clear All Media
+Add Audio To Play And Pause
     Click Add Media Btn
     Check Add List Empty
     Select ${AUDIO} To Add List
@@ -50,8 +53,7 @@ Clear And Add Audio To Play
     Check Main List Not Empty
     Check Media Shows With id:current-seeker
 
-Clear And Add Video To Play
-    Clear All Media
+Add Video To Play And Pause
     Click Add Media Btn
     Check Add List Empty
     Select ${VIDEO} To Add List
@@ -60,9 +62,8 @@ Clear And Add Video To Play
     Check Main List Not Empty
     Check Media Shows With id:play-video
 
-# BAD Sample
-Check No Media Then Add Multiple Media to Play
-    Clear All Media
+# Bad Coding Style
+Add Multiple Media to Play And Pause
     Click Add Media Btn
     Check Add List Empty
     Select ${IMAGE} To Add List
@@ -95,6 +96,11 @@ Check No Media Then Add Multiple Media to Play
     Should Be True    ${count} == 1
 
 *** Keywords ***
+Open Browser
+    Create Webdriver    Remote    desired_capabilities=${binary_location}    command_executor=http://127.0.0.1:9515
+
+
+
 Wait And Click
     [Arguments]    ${locator}
     Wait Until Element Is Visible    ${locator}    20
@@ -141,10 +147,12 @@ Check Main List Not Empty
     Wait Until Page Does Not Contain    No Media on List!    ${DELAY}
 
 Check Media Shows With ${locator}
-    sleep    ${PAUSE_SEC}
+    Sleep    ${DEMO_PAUSE_SEC}
     Wait And Click    class:fa-play
     Wait Until Element Is Visible    ${locator}    ${DELAY}
-    sleep    ${PLAY_SEC}
+    Sleep    ${DEMO_PLAY_SEC}
+
+Check Media Disappear With ${locator}
     Wait And Click    class:fa-pause
     Wait Until Element Is Not Visible    ${locator}    ${DELAY}
-    sleep    ${PAUSE_SEC}
+    Sleep    ${DEMO_PAUSE_SEC}
